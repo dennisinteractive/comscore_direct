@@ -97,6 +97,6 @@ class ComscoreDirectTest extends DrupalWebTestCase {
     $this->assertPattern('|_comscore.push\({.*"c5":"test_genre"|');
     $this->assertPattern('|_comscore.push\({.*"c6":"test_package"|');
     $this->assertPattern('|_comscore.push\({.*"c15":"test_segment"|');
-    $this->assertRaw('<img src="http://b.scorecardresearch.com/p?c1=2&c2=123456&c3=&c4=http%3A//example.com/test/&c5=test_genre&c6=test_package&c15=test_segment&cv=2.0&cj=1"');
+    $this->assertRaw('b.scorecardresearch.com/p?c1=2&c2=123456&c3=&c4=http%3A//example.com/test/&c5=test_genre&c6=test_package&c15=test_segment&cv=2.0&cj=1"');
   }
 }

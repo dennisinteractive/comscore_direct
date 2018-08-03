@@ -44,7 +44,6 @@ function comscore_direct_page_alter(&$page) {
   }
 
   global $base_url;
-  global $is_https;
   $com_base_url = check_url(variable_get('comscore_direct_baseurl', ''));
   $path = (!empty($com_base_url) ? $com_base_url : $base_url) . request_uri();
   $com_id = check_plain(variable_get('comscore_direct_id', ''));
@@ -69,11 +68,11 @@ function comscore_direct_page_alter(&$page) {
     )
   );
 
-    if (!empty($com_id)) {
-      $request_scheme = $is_https ? 'https://sb' : 'https://b';
-      $page['page_bottom']['comscore direct'] = array(
-        '#type' => 'markup',
-        '#markup' => '<!-- Begin comScore Tag -->
+  if (!empty($com_id)) {
+    $request_scheme = drupal_is_https() ? 'https://sb' : 'http://b';
+    $page['page_bottom']['comscore direct'] = array(
+      '#type' => 'markup',
+      '#markup' => '<!-- Begin comScore Tag -->
           <script>
             var _comscore = _comscore || [];
             _comscore.push(' . json_encode($script_args) . ');
@@ -87,6 +86,6 @@ function comscore_direct_page_alter(&$page) {
             <img src="' . $request_scheme . '.scorecardresearch.com/p?' . drupal_http_build_query($noscript_args) . '" />
           </noscript>
       <!-- End comScore Tag -->'
-        );
-    }
+    );
+  }
 }
